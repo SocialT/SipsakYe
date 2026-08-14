@@ -13,7 +13,12 @@ git reset --hard "origin/$BRANCH"
 echo "→ Doldurulmamış alanlar kontrol ediliyor…"
 python3 tools/check_placeholders.py || echo "  (uyarı: doldurulmamış alan var)"
 
-echo "→ Nginx yapılandırması test ediliyor…"
-sudo nginx -t && sudo systemctl reload nginx
+if docker ps --format '{{.Names}}' 2>/dev/null | grep -qx sipsakye-promo; then
+  echo "→ sipsakye-promo container'ı yeniden başlatılıyor…"
+  docker compose -f deploy/docker-compose.promo.yml restart
+else
+  echo "→ Nginx yapılandırması test ediliyor…"
+  sudo nginx -t && sudo systemctl reload nginx
+fi
 
 echo "✓ Güncelleme tamam."

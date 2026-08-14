@@ -368,7 +368,6 @@ ul, ol { padding-left: 1.35em; }
 
 /* ---------- 9. Kartlar ---------- */
 .grid { display: grid; gap: 20px; }
-.grid--3 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
 .grid--2 { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
 
 .card {
@@ -385,39 +384,6 @@ ul, ol { padding-left: 1.35em; }
 .card__ico--green { background: var(--accent-soft); color: var(--accent); }
 .card h3 { font-size: 1.12rem; margin-bottom: 8px; }
 .card p { color: var(--text-muted); font-size: .97rem; }
-
-/* Kategori vitrinleri */
-.showcase { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-.showcase__item {
-  position: relative; overflow: hidden; border-radius: var(--radius-lg);
-  padding: 34px 30px; min-height: 240px; display: flex; flex-direction: column; justify-content: flex-end;
-  color: #fff; box-shadow: var(--shadow-md);
-}
-.showcase__item--food { background: linear-gradient(145deg, #FF5A2B, #E8341A 55%, #C22B14); }
-.showcase__item--market { background: linear-gradient(145deg, #16A863, #0E8450 55%, #0A6640); }
-.showcase__item h3 { font-size: 1.5rem; margin-bottom: 8px; }
-.showcase__item p { opacity: .92; font-size: .98rem; max-width: 34ch; }
-.showcase__emoji { position: absolute; top: -8px; right: 10px; font-size: 6.5rem; opacity: .22; rotate: -10deg; user-select: none; }
-.showcase__tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
-.showcase__tags span { background: rgba(255,255,255,.2); border-radius: var(--radius-pill); padding: 5px 13px; font-size: .8rem; font-weight: 600; }
-
-/* Adımlar */
-.steps { counter-reset: step; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
-.step { position: relative; padding-top: 8px; }
-.step__num {
-  counter-increment: step; width: 46px; height: 46px; border-radius: 50%;
-  background: var(--brand); color: var(--brand-ink); display: grid; place-items: center;
-  font-weight: 800; font-size: 1.1rem; margin-bottom: 16px; box-shadow: var(--shadow-brand);
-}
-.step__num::before { content: counter(step); }
-.step h3 { font-size: 1.1rem; margin-bottom: 8px; }
-.step p { color: var(--text-muted); font-size: .97rem; }
-
-/* İstatistik şeridi */
-.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; }
-.stat { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; text-align: center; }
-.stat__v { font-size: 1.6rem; font-weight: 800; letter-spacing: -.03em; color: var(--brand); }
-.stat__l { font-size: .88rem; color: var(--text-muted); margin-top: 4px; }
 
 /* ---------- 10. SSS ---------- */
 .faq { display: grid; gap: 12px; max-width: 780px; margin-inline: auto; }

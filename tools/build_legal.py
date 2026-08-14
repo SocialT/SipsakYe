@@ -212,8 +212,6 @@ PAGE = """<!DOCTYPE html>
       Şipşak Ye
     </a>
     <nav class="nav" id="nav" aria-label="Ana menü">
-      <a class="nav__link" href="/#ozellikler">Özellikler</a>
-      <a class="nav__link" href="/#nasil-calisir">Nasıl çalışır</a>
       <a class="nav__link" href="/#sss">SSS</a>
       <a class="nav__link" href="/destek.html">Destek</a>
     </nav>
@@ -282,8 +280,6 @@ PAGE = """<!DOCTYPE html>
       <div class="footer-col">
         <h4>Uygulama</h4>
         <ul>
-          <li><a href="/#ozellikler">Özellikler</a></li>
-          <li><a href="/#nasil-calisir">Nasıl çalışır</a></li>
           <li><a href="/#sss">Sık sorulan sorular</a></li>
         </ul>
       </div>

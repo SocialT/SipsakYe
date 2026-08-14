@@ -16,6 +16,9 @@ import sys
 import zipfile
 from xml.etree import ElementTree as ET
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import site_common  # noqa: E402 — header/footer tek kaynağı
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 W = "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}"
 
@@ -203,33 +206,7 @@ PAGE = """<!DOCTYPE html>
 <body>
 <a class="skip-link" href="#main">İçeriğe geç</a>
 
-<header class="site-header">
-  <div class="wrap">
-    <a class="brand" href="/">
-      <span class="brand__mark" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4.5 13.5H11l-1 8.5 8.5-11.5H12l1-8.5Z"/></svg>
-      </span>
-      Şipşak Ye
-    </a>
-    <nav class="nav" id="nav" aria-label="Ana menü">
-      <a class="nav__link" href="/#sss">SSS</a>
-      <a class="nav__link" href="/destek.html">Destek</a>
-    </nav>
-    <div class="header-tools">
-      <div class="lang-switch">
-        <a href="/{slug}.html" aria-current="true" hreflang="tr">TR</a>
-        <a href="/en/{en_slug}.html" hreflang="en">EN</a>
-      </div>
-      <button class="icon-btn theme-toggle" type="button" aria-label="Koyu / açık tema değiştir">
-        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
-        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
-      </button>
-      <button class="icon-btn nav-toggle" type="button" aria-label="Menüyü aç" aria-expanded="false" aria-controls="nav">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-      </button>
-    </div>
-  </div>
-</header>
+{header}
 
 <main id="main">
   <div class="page-head">
@@ -265,49 +242,7 @@ PAGE = """<!DOCTYPE html>
   </div>
 </main>
 
-<footer class="site-footer">
-  <div class="wrap">
-    <div class="footer-grid">
-      <div class="footer-about">
-        <a class="brand" href="/">
-          <span class="brand__mark" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4.5 13.5H11l-1 8.5 8.5-11.5H12l1-8.5Z"/></svg>
-          </span>
-          Şipşak Ye
-        </a>
-        <p>Yemek ve market siparişini tek uygulamada birleştiren online sipariş platformu.</p>
-      </div>
-      <div class="footer-col">
-        <h4>Uygulama</h4>
-        <ul>
-          <li><a href="/#sss">Sık sorulan sorular</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Destek</h4>
-        <ul>
-          <li><a href="/destek.html">Destek merkezi</a></li>
-          <li><a href="/hesap-silme.html">Hesap silme</a></li>
-          <li><a href="/iletisim.html">İletişim ve künye</a></li>
-          <li><a href="mailto:sipsakye0@gmail.com">sipsakye0@gmail.com</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Yasal</h4>
-        <ul>
-          <li><a href="/kullanim-kosullari.html">Kullanım Koşulları</a></li>
-          <li><a href="/gizlilik-politikasi.html">Gizlilik Politikası</a></li>
-          <li><a href="/aydinlatma-metni.html">Aydınlatma Metni</a></li>
-          <li><a href="/cerez-politikasi.html">Çerez Politikası</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span>&copy; <span data-year>2026</span> Şipşak Ye. Tüm hakları saklıdır.</span>
-      <span><a href="/en/{en_slug}.html">English</a></span>
-    </div>
-  </div>
-</footer>
+{footer}
 
 <script src="/assets/js/main.js" defer></script>
 </body>
@@ -319,6 +254,7 @@ DOCS = [
         "src": "eb8dbdc0-Ki_isel_Verilerin_Korunmas____lenmesi_ve_Gizlilik_Politikas_.docx",
         "slug": "gizlilik-politikasi",
         "en_slug": "privacy-policy",
+        "page_id": "gizlilik",
         "title": "Kişisel Verilerin Korunması, İşlenmesi ve Gizlilik Politikası",
         "desc": "Şipşak Ye Platformu'nun 6698 sayılı KVKK kapsamında kişisel verileri hangi ilkelerle işlediğini, sakladığını, aktardığını ve koruduğunu açıklayan politika metni.",
     },
@@ -326,6 +262,7 @@ DOCS = [
         "src": "a27e0e03-ayd_nlatma_metni.docx",
         "slug": "aydinlatma-metni",
         "en_slug": "privacy-notice",
+        "page_id": "aydinlatma",
         "title": "KVKK Aydınlatma Metni",
         "desc": "6698 sayılı Kişisel Verilerin Korunması Kanunu uyarınca hangi kişisel verilerinizin, hangi amaçla ve hangi hukuki sebeple işlendiğine ilişkin aydınlatma metni.",
     },
@@ -333,6 +270,7 @@ DOCS = [
         "src": "d872113e-mesafeli_sat___s_zle_mesi_ve_kullan_m_ko_ullar_.docx",
         "slug": "kullanim-kosullari",
         "en_slug": "terms",
+        "page_id": "kosullar",
         "title": "Mesafeli Satış Sözleşmesi ve Kullanım Koşulları",
         "desc": "Şipşak Ye Platformu üzerinden verilen siparişlere, ödeme ve teslimat süreçlerine, iptal ve iade koşullarına ilişkin sözleşme ve kullanım koşulları.",
     },
@@ -369,6 +307,8 @@ def main():
             en_slug=doc["en_slug"],
             updated=UPDATED,
             toc=toc_html,
+            header=site_common.render_header(doc["page_id"], "tr"),
+            footer=site_common.render_footer(doc["page_id"], "tr"),
             body="\n".join("        " + line for line in body.splitlines()),
         )
         dest = os.path.join(ROOT, doc["slug"] + ".html")

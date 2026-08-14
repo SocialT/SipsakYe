@@ -182,6 +182,39 @@ ul, ol { padding-left: 1.35em; }
 .nav a.nav__link:hover { color: var(--text); background: var(--surface-2); text-decoration: none; }
 .nav a.nav__link[aria-current="page"] { color: var(--brand); }
 
+/* Sözleşmeler / Legal açılır menüsü — native <details>, JS gerektirmez. */
+.nav-dropdown { position: relative; }
+.nav-dropdown > summary {
+  list-style: none; cursor: pointer; user-select: none;
+  display: inline-flex; align-items: center; gap: 6px;
+  color: var(--text-muted); font-weight: 600; font-size: .95rem;
+  padding: 9px 13px; border-radius: var(--radius-pill); transition: background .15s ease, color .15s ease;
+}
+.nav-dropdown > summary::-webkit-details-marker { display: none; }
+.nav-dropdown > summary:hover { color: var(--text); background: var(--surface-2); }
+.nav-dropdown.is-active > summary { color: var(--brand); }
+.nav-dropdown[open] > summary { color: var(--text); background: var(--surface-2); }
+
+.nav-dropdown__caret {
+  width: 8px; height: 8px; margin-top: -3px;
+  border-right: 2px solid currentColor; border-bottom: 2px solid currentColor;
+  rotate: 45deg; transition: rotate .15s ease, margin-top .15s ease; flex: none;
+}
+.nav-dropdown[open] .nav-dropdown__caret { rotate: -135deg; margin-top: 3px; }
+
+.nav-dropdown__panel {
+  position: absolute; top: calc(100% + 8px); left: 0; z-index: 120;
+  min-width: 230px; background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); box-shadow: var(--shadow-lg); padding: 7px;
+  display: grid; gap: 1px;
+}
+.nav-dropdown__panel a {
+  display: block; padding: 10px 12px; border-radius: var(--radius-sm);
+  color: var(--text); font-size: .92rem; font-weight: 600;
+}
+.nav-dropdown__panel a:hover { background: var(--surface-2); text-decoration: none; }
+.nav-dropdown__panel a[aria-current="page"] { color: var(--brand); background: var(--brand-soft); }
+
 .header-tools { display: flex; align-items: center; gap: 8px; margin-left: 8px; }
 
 .lang-switch { display: inline-flex; background: var(--surface-2); border-radius: var(--radius-pill); padding: 3px; border: 1px solid var(--border); }
@@ -222,6 +255,12 @@ ul, ol { padding-left: 1.35em; }
   .nav a.nav__link { padding: 13px 14px; font-size: 1.02rem; }
   .nav-toggle { display: grid; order: 3; }
   .header-tools { margin-left: auto; }
+
+  .nav-dropdown > summary { padding: 13px 14px; font-size: 1.02rem; }
+  .nav-dropdown__panel {
+    position: static; margin-top: 2px; margin-bottom: 4px;
+    border: none; box-shadow: none; background: transparent; padding-left: 10px;
+  }
 }
 
 /* ---------- 4. Butonlar ---------- */

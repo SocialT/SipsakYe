@@ -41,6 +41,8 @@ inceleme ekibini karıştırdığı için) — başlıktaki TR/EN düğmesi kull
 │   ├── DEPLOY.md                   Kurulum adımları
 │   └── update.sh                   Sunucuda güncelleme
 ├── tools/
+│   ├── site_common.py              Header/footer/nav — TEK KAYNAK
+│   ├── build_pages.py              site_common'ı tüm sayfalara uygular
 │   ├── build_legal.py              Word belgelerinden hukuki sayfa üretir
 │   ├── make_icons.py               Favicon, PWA ikonları, OG görseli
 │   ├── check_links.py              Kırık iç bağlantı kontrolü
@@ -51,9 +53,21 @@ inceleme ekibini karıştırdığı için) — başlıktaki TR/EN düğmesi kull
 
 ## Nasıl düzenlenir
 
-**Normal sayfalar** (ana sayfa, destek, hesap silme, iletişim, çerez, 404)
-doğrudan HTML olarak düzenlenir. Başlık ve alt bilgi her sayfada tekrar eder;
-birinde değişiklik yaparsanız diğerlerine de uygulayın.
+**Header / footer / nav (dahil "Sözleşmeler" açılır menüsü)** artık **tek
+kaynaktan** geliyor: `tools/site_common.py`. Menüye link eklemek, footer
+sütununu değiştirmek gibi işler için SADECE bu dosyayı düzenleyin, sonra:
+
+```bash
+python3 tools/build_pages.py
+```
+
+Script bunu 17 sayfanın hepsine otomatik uygular — `<header>` ve `<footer>`
+bloklarını tazeleyip geri kalan içeriğe dokunmaz. Header/footer'ı elle tek
+tek sayfalarda düzenlemeyin; bir sonraki `build_pages.py` çalıştırmasında
+üzerine yazılır.
+
+**Sayfa gövdeleri** (hero, kart içerikleri, SSS metinleri vb.) doğrudan HTML
+olarak düzenlenir — ana sayfa, destek, hesap silme, iletişim, çerez, 404.
 
 **Hukuki sayfalar** (kullanım koşulları, gizlilik politikası, aydınlatma metni)
 Word belgelerinden üretilir — elle düzenlemeyin, üzerine yazılır:
@@ -63,7 +77,8 @@ python3 tools/build_legal.py /kaynak/docx/klasoru
 ```
 
 Betik belgelerin içeriğine dokunmaz; yalnızca `TYPO_FIXES` listesindeki yazım
-hatalarını düzeltir ve her düzeltmeyi rapor eder.
+hatalarını düzeltir ve her düzeltmeyi rapor eder. Bu betik de header/footer'ı
+`site_common.py`'den çeker, ayrıca `build_pages.py` çalıştırmaya gerek yok.
 
 **İkonlar** değişirse:
 

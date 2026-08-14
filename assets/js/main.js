@@ -33,6 +33,20 @@
     });
   }
 
+  /* --- Sözleşmeler/Legal açılır menüsü: dışarı tıklayınca veya Esc ile kapat.
+     Menünün kendisi <details>/<summary> ile çalışır, bu sadece ek incelik. --- */
+  document.addEventListener("click", function (ev) {
+    document.querySelectorAll(".nav-dropdown[open]").forEach(function (dd) {
+      if (!dd.contains(ev.target)) dd.removeAttribute("open");
+    });
+  });
+  document.addEventListener("keydown", function (ev) {
+    if (ev.key !== "Escape") return;
+    document.querySelectorAll(".nav-dropdown[open]").forEach(function (dd) {
+      dd.removeAttribute("open");
+    });
+  });
+
   /* --- Header gölgesi --- */
   var header = document.querySelector(".site-header");
   if (header) {

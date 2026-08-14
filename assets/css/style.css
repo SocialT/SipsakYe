@@ -363,7 +363,10 @@ ul, ol { padding-left: 1.35em; }
 .ps__tab.is-on { background: var(--brand); color: #fff; }
 .ps__list { padding: 6px 16px; display: grid; gap: 9px; }
 .ps__card { background: var(--surface); border: 1px solid var(--border); border-radius: 13px; padding: 9px 10px; display: flex; gap: 9px; align-items: center; box-shadow: var(--shadow-sm); }
-.ps__thumb { width: 38px; height: 38px; border-radius: 9px; flex: none; display: grid; place-items: center; font-size: 1.1rem; }
+.ps__thumb {
+  width: 38px; height: 38px; border-radius: 9px; flex: none; display: grid; place-items: center;
+  font-size: .92rem; font-weight: 800; letter-spacing: -.02em;
+}
 .ps__meta { min-width: 0; display: flex; flex-direction: column; }
 .ps__name, .ps__sub { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .ps__name { font-size: .72rem; font-weight: 700; color: var(--text); }
@@ -378,7 +381,8 @@ ul, ol { padding-left: 1.35em; }
   display: flex; align-items: center; gap: 9px; font-size: .8rem; font-weight: 700;
 }
 .float-chip small { display: block; font-size: .68rem; font-weight: 500; color: var(--text-faint); }
-.float-chip__ico { width: 30px; height: 30px; border-radius: 9px; display: grid; place-items: center; flex: none; font-size: .95rem; }
+.float-chip__ico { width: 30px; height: 30px; border-radius: 9px; display: grid; place-items: center; flex: none; }
+.float-chip__ico svg { width: 16px; height: 16px; }
 .float-chip--a { top: 14%; left: -6%; animation: bob 5s ease-in-out infinite; }
 .float-chip--b { bottom: 16%; right: -8%; animation: bob 5s ease-in-out infinite .9s; }
 @keyframes bob { 0%,100% { translate: 0 0; } 50% { translate: 0 -9px; } }
@@ -418,8 +422,9 @@ ul, ol { padding-left: 1.35em; }
 .card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: var(--border-strong); }
 .card__ico {
   width: 48px; height: 48px; border-radius: 14px; display: grid; place-items: center;
-  background: var(--brand-soft); color: var(--brand-strong); margin-bottom: 18px; font-size: 1.3rem;
+  background: var(--brand-soft); color: var(--brand-strong); margin-bottom: 18px;
 }
+.card__ico svg { width: 22px; height: 22px; }
 .card__ico--green { background: var(--accent-soft); color: var(--accent); }
 .card h3 { font-size: 1.12rem; margin-bottom: 8px; }
 .card p { color: var(--text-muted); font-size: .97rem; }

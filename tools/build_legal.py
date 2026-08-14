@@ -210,7 +210,7 @@ PAGE = """<!DOCTYPE html>
 
 <main id="main">
   <div class="page-head">
-    <div class="wrap">
+    <div class="wrap reveal">
       <p class="breadcrumb"><a href="/">Ana sayfa</a> &rsaquo; {title}</p>
       <h1>{title}</h1>
       <p>{desc}</p>
@@ -220,7 +220,7 @@ PAGE = """<!DOCTYPE html>
 
   <div class="wrap">
     <div class="doc-layout">
-      <aside class="doc-toc">
+      <aside class="doc-toc reveal">
         <h2>İçindekiler</h2>
         <ul>
 {toc}

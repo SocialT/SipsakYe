@@ -13,6 +13,18 @@
   --accent:       #12915A;
   --accent-soft:  #E4F5EC;
 
+  /* İkincil sıcak vurgu — hero/CTA degradelerinde marka rengiyle birlikte
+     kullanılıyor. Tek bir token: rastgele iki farklı turuncu yerine. */
+  --brand-2:      #FF8A3D;
+
+  /* Rozet/avatar paleti — markanın iki ana rengine (turuncu, yeşil) iki
+     tamamlayıcı ton eklenerek oluşturuldu. Yeni bir ton gerekirse rastgele
+     eklenmez, bu dörtlüye eklenir. */
+  --tint-amber-bg:#FFF1DA;
+  --tint-amber-fg:#B45A0A;
+  --tint-plum-bg: #F2E8FB;
+  --tint-plum-fg: #7C3AED;
+
   /* Yüzeyler */
   --bg:           #FFFFFF;
   --bg-warm:      #FFF7F3;
@@ -55,6 +67,12 @@
     --accent:       #3FCB8B;
     --accent-soft:  #102E20;
 
+    --brand-2:      #FF9A5C;
+    --tint-amber-bg:#3A2A12;
+    --tint-amber-fg:#F0A94E;
+    --tint-plum-bg: #2C1F3D;
+    --tint-plum-fg: #C79CF5;
+
     --bg:           #14100E;
     --bg-warm:      #1A1512;
     --surface:      #1E1815;
@@ -80,6 +98,12 @@
   --brand-ink:    #1C0D08;
   --accent:       #3FCB8B;
   --accent-soft:  #102E20;
+
+  --brand-2:      #FF9A5C;
+  --tint-amber-bg:#3A2A12;
+  --tint-amber-fg:#F0A94E;
+  --tint-plum-bg: #2C1F3D;
+  --tint-plum-fg: #C79CF5;
 
   --bg:           #14100E;
   --bg-warm:      #1A1512;
@@ -169,8 +193,9 @@ ul, ol { padding-left: 1.35em; }
 .brand:hover { text-decoration: none; }
 .brand__mark {
   width: 34px; height: 34px; border-radius: 10px; flex: none;
-  background: linear-gradient(140deg, var(--brand), #FF8A3D);
+  background: linear-gradient(140deg, var(--brand), var(--brand-2));
   display: grid; place-items: center; box-shadow: var(--shadow-brand);
+  transition: rotate .25s ease, scale .25s ease;
 }
 .brand__mark svg { width: 20px; height: 20px; }
 
@@ -329,7 +354,7 @@ ul, ol { padding-left: 1.35em; }
   letter-spacing: -.035em; margin-bottom: 20px;
 }
 .hero h1 .grad {
-  background: linear-gradient(100deg, var(--brand), #FF9330);
+  background: linear-gradient(100deg, var(--brand), var(--brand-2));
   -webkit-background-clip: text; background-clip: text; color: transparent;
 }
 .hero__lead { font-size: clamp(1.05rem, 2vw, 1.2rem); color: var(--text-muted); max-width: 46ch; margin-bottom: 30px; }
@@ -354,7 +379,7 @@ ul, ol { padding-left: 1.35em; }
   width: 100%; height: 100%; border-radius: 34px; overflow: hidden;
   background: var(--bg-warm); display: flex; flex-direction: column;
 }
-.ps__top { padding: 40px 16px 12px; background: linear-gradient(150deg, var(--brand), #FF8A3D); color: #fff; }
+.ps__top { padding: 40px 16px 12px; background: linear-gradient(150deg, var(--brand), var(--brand-2)); color: #fff; }
 .ps__loc { font-size: .62rem; opacity: .85; }
 .ps__addr { font-size: .82rem; font-weight: 700; margin-bottom: 12px; }
 .ps__search { background: rgba(255,255,255,.22); border-radius: var(--radius-pill); padding: 8px 13px; font-size: .7rem; color: rgba(255,255,255,.9); }
@@ -367,6 +392,12 @@ ul, ol { padding-left: 1.35em; }
   width: 38px; height: 38px; border-radius: 9px; flex: none; display: grid; place-items: center;
   font-size: .92rem; font-weight: 800; letter-spacing: -.02em;
 }
+/* Restoran/market baş harf avatarları — marka paletindeki dört tondan
+   sırayla seçilir, rastgele renk yok. */
+.ps__thumb--1 { background: var(--brand-soft); color: var(--brand-strong); }
+.ps__thumb--2 { background: var(--tint-amber-bg); color: var(--tint-amber-fg); }
+.ps__thumb--3 { background: var(--accent-soft); color: var(--accent); }
+.ps__thumb--4 { background: var(--tint-plum-bg); color: var(--tint-plum-fg); }
 .ps__meta { min-width: 0; display: flex; flex-direction: column; }
 .ps__name, .ps__sub { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .ps__name { font-size: .72rem; font-weight: 700; color: var(--text); }
@@ -383,6 +414,8 @@ ul, ol { padding-left: 1.35em; }
 .float-chip small { display: block; font-size: .68rem; font-weight: 500; color: var(--text-faint); }
 .float-chip__ico { width: 30px; height: 30px; border-radius: 9px; display: grid; place-items: center; flex: none; }
 .float-chip__ico svg { width: 16px; height: 16px; }
+.float-chip__ico--brand { background: var(--brand-soft); color: var(--brand-strong); }
+.float-chip__ico--accent { background: var(--accent-soft); color: var(--accent); }
 .float-chip--a { top: 14%; left: -6%; animation: bob 5s ease-in-out infinite; }
 .float-chip--b { bottom: 16%; right: -8%; animation: bob 5s ease-in-out infinite .9s; }
 @keyframes bob { 0%,100% { translate: 0 0; } 50% { translate: 0 -9px; } }
@@ -452,7 +485,7 @@ ul, ol { padding-left: 1.35em; }
 
 /* ---------- 11. CTA ---------- */
 .cta-band {
-  background: linear-gradient(140deg, var(--brand), #FF8A3D);
+  background: linear-gradient(140deg, var(--brand), var(--brand-2));
   border-radius: var(--radius-lg); padding: clamp(36px, 6vw, 64px);
   color: #fff; text-align: center; box-shadow: var(--shadow-lg); position: relative; overflow: hidden;
 }
@@ -555,7 +588,7 @@ ul, ol { padding-left: 1.35em; }
 /* ---------- 15. 404 ---------- */
 .notfound { text-align: center; padding: clamp(60px, 12vw, 130px) 0; }
 .notfound__code { font-size: clamp(4.5rem, 16vw, 9rem); font-weight: 800; letter-spacing: -.06em; line-height: 1;
-  background: linear-gradient(100deg, var(--brand), #FF9330); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  background: linear-gradient(100deg, var(--brand), var(--brand-2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .notfound h1 { font-size: clamp(1.5rem, 3.6vw, 2.1rem); margin: 12px 0 14px; }
 .notfound p { color: var(--text-muted); max-width: 46ch; margin: 0 auto 28px; }
 
@@ -570,7 +603,39 @@ ul, ol { padding-left: 1.35em; }
   .js .reveal { opacity: 1; translate: 0 0; }
 }
 
-/* ---------- 17. Yazdırma ---------- */
+/* ---------- 17. Hero girişi ve ince hareketler ---------- */
+/* Sayfa yüklenir yüklenmez çalışan saf CSS animasyonları. .reveal'in aksine
+   hiçbir tetikleyici (scroll, JS) beklemez — DOM'a girer girmez oynar,
+   bu yüzden JS tamamen kapalıyken de sorunsuz çalışır. */
+@keyframes heroUp {
+  from { opacity: 0; translate: 0 16px; }
+  to   { opacity: 1; translate: 0 0; }
+}
+@keyframes heroPop {
+  from { opacity: 0; translate: 0 20px; scale: .96; }
+  to   { opacity: 1; translate: 0 0; scale: 1; }
+}
+.hero .eyebrow     { animation: heroUp .6s cubic-bezier(.16,1,.3,1) both; }
+.hero h1           { animation: heroUp .6s cubic-bezier(.16,1,.3,1) .09s both; }
+.hero .hero__lead  { animation: heroUp .6s cubic-bezier(.16,1,.3,1) .16s both; }
+.hero .store-badges{ animation: heroUp .6s cubic-bezier(.16,1,.3,1) .23s both; }
+.hero .hero__note  { animation: heroUp .6s cubic-bezier(.16,1,.3,1) .3s both; }
+.hero .phone-stage { animation: heroPop .7s cubic-bezier(.16,1,.3,1) .12s both; }
+
+/* Arka plandaki iki bulanık leke — çok yavaş, neredeyse fark edilmeyen bir sürüklenme. */
+@keyframes driftA { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-16px, 12px); } }
+@keyframes driftB { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(14px, -10px); } }
+.hero::before { animation: driftA 22s ease-in-out infinite; }
+.hero::after  { animation: driftB 26s ease-in-out infinite; }
+
+/* "Yakında" rozetleri: bekleyen bir durumu ima eden yumuşak bir nefes alma. */
+@keyframes softPulse { 0%, 100% { opacity: .8; } 50% { opacity: 1; } }
+.store-badge--soon { animation: softPulse 3.2s ease-in-out infinite; }
+
+/* Marka işaretine hover'da abartısız, fark edilir bir tepki. */
+.brand:hover .brand__mark { rotate: -8deg; scale: 1.06; }
+
+/* ---------- 18. Yazdırma ---------- */
 @media print {
   .site-header, .site-footer, .doc-toc, .skip-link, .cta-band { display: none !important; }
   body { background: #fff; color: #000; font-size: 11pt; }
@@ -578,7 +643,7 @@ ul, ol { padding-left: 1.35em; }
   .prose p, .prose li { color: #000; }
 }
 
-/* ---------- 18. Doldurulacak alan işareti ----------
+/* ---------- 19. Doldurulacak alan işareti ----------
    Yayına almadan önce tüm .ph öğeleri gerçek bilgiyle değiştirilmelidir.
    Kontrol: python3 tools/check_placeholders.py                         */
 .ph {

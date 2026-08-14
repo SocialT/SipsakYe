@@ -15,14 +15,18 @@ sudo chown -R $USER:$USER /var/www/sipsakye.com
 
 ## 2. Depoyu sunucuya çek
 
+Depo herkese açık (public), bu yüzden sunucuda ayrıca bir deploy key/token
+gerekmez — düz `https://` ile klonlanabilir.
+
 ```bash
-git clone <depo-adresi> /var/www/sipsakye.com
+git clone https://github.com/SocialT/SipsakYe.git /var/www/sipsakye.com
 cd /var/www/sipsakye.com
 git checkout claude/mobile-app-promo-site-yecg4a
 ```
 
-> Depo özel ise sunucuda bir **deploy key** oluşturup (`ssh-keygen -t ed25519`)
-> genel anahtarı GitHub'da deponun *Settings → Deploy keys* bölümüne ekleyin.
+> Site şu an `claude/mobile-app-promo-site-yecg4a` dalında hazır; henüz
+> `main`'e birleştirilmedi. `main`'e alındığında sunucuda
+> `git checkout main && git pull` ile geçebilirsiniz.
 
 ## 3. Cloudflare DNS
 
@@ -30,8 +34,8 @@ Cloudflare panelinde alan adınız için:
 
 | Tür | Ad | İçerik | Proxy |
 |-----|----|--------|-------|
-| A | `@` | VPS IPv4 adresi | Proxied (turuncu bulut) |
-| A | `www` | VPS IPv4 adresi | Proxied (turuncu bulut) |
+| A | `@` | `167.233.54.178` | Proxied (turuncu bulut) |
+| A | `www` | `167.233.54.178` | Proxied (turuncu bulut) |
 
 ## 4. TLS — Cloudflare Origin Certificate (önerilen)
 

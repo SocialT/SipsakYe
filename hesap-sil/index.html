@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hesabımı Sil — Şipşak Ye</title>
+<meta name="robots" content="noindex">
+<style>
+  :root {
+    --bg: #f7f7f8;
+    --card-bg: #ffffff;
+    --text: #1a1a1a;
+    --text-muted: #6b6b6b;
+    --border: #e2e2e4;
+    --primary: #1f7a4d;
+    --primary-hover: #175f3c;
+    --danger: #c0392b;
+    --danger-hover: #a02f21;
+    --danger-bg: #fdf1f0;
+    --success-bg: #eef8f1;
+    --radius: 12px;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    display: flex;
+    justify-content: center;
+    padding: 32px 16px;
+    line-height: 1.5;
+  }
+  .card {
+    width: 100%;
+    max-width: 440px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px 24px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  h1 {
+    font-size: 20px;
+    margin: 0 0 4px;
+  }
+  .subtitle {
+    color: var(--text-muted);
+    font-size: 14px;
+    margin: 0 0 24px;
+  }
+  .warning-box {
+    background: var(--danger-bg);
+    border: 1px solid #f3c9c4;
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    font-size: 13px;
+    color: var(--danger);
+    margin-bottom: 20px;
+  }
+  .warning-box strong { display: block; margin-bottom: 4px; }
+  label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  input[type="tel"], input[type="text"] {
+    width: 100%;
+    padding: 12px 14px;
+    font-size: 16px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 16px;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  input[type="tel"]:focus, input[type="text"]:focus {
+    border-color: var(--primary);
+  }
+  .hint { font-size: 12px; color: var(--text-muted); margin: -10px 0 16px; }
+  button {
+    width: 100%;
+    padding: 13px;
+    font-size: 15px;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.15s, opacity 0.15s;
+  }
+  button:disabled { opacity: 0.55; cursor: not-allowed; }
+  .btn-primary { background: var(--primary); color: #fff; }
+  .btn-primary:hover:not(:disabled) { background: var(--primary-hover); }
+  .btn-danger { background: var(--danger); color: #fff; }
+  .btn-danger:hover:not(:disabled) { background: var(--danger-hover); }
+  .btn-link {
+    background: none;
+    color: var(--text-muted);
+    font-weight: 400;
+    font-size: 13px;
+    padding: 8px;
+    margin-top: 8px;
+  }
+  .btn-link:hover:not(:disabled) { color: var(--text); }
+  .checkbox-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 4px 0 20px;
+    font-size: 13px;
+    color: var(--text);
+  }
+  .checkbox-row input { margin-top: 3px; flex-shrink: 0; }
+  .msg {
+    font-size: 13px;
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin-bottom: 16px;
+    display: none;
+  }
+  .msg.error { display: block; background: var(--danger-bg); color: var(--danger); }
+  .msg.success { display: block; background: var(--success-bg); color: var(--primary); }
+  .step { display: none; }
+  .step.active { display: block; }
+  .success-icon { font-size: 40px; text-align: center; margin-bottom: 12px; }
+  .footer-note {
+    font-size: 11px;
+    color: var(--text-muted);
+    text-align: center;
+    margin-top: 20px;
+  }
+</style>
+</head>
+<body>
+
+<div class="card">
+
+  <!-- ── ADIM 1: telefon numarası ── -->
+  <div class="step active" id="step-phone">
+    <h1>Hesabımı Kalıcı Olarak Sil</h1>
+    <p class="subtitle">Şipşak Ye hesabınızı ve kişisel verilerinizi uygulamayı açmadan, sadece SMS doğrulaması ile silebilirsiniz.</p>
+
+    <div class="warning-box">
+      <strong>⚠️ Bu işlem geri alınamaz</strong>
+      Hesabınız, adresleriniz, favorileriniz ve bildirimleriniz kalıcı olarak silinir.
+      Geçmiş siparişleriniz (kanuni saklama yükümlülüğü ve kötüye kullanım takibi
+      nedeniyle) kimliğinizden bağımsız olarak sistemde kalmaya devam eder.
+    </div>
+
+    <div class="msg error" id="phone-error"></div>
+
+    <label for="phone">Kayıtlı telefon numaranız</label>
+    <input type="tel" id="phone" inputmode="tel" placeholder="+905XXXXXXXXX" autocomplete="tel">
+    <p class="hint">Uluslararası formatta girin, örn. +905XXXXXXXXX</p>
+
+    <button class="btn-primary" id="btn-start" onclick="startDeletion()">Doğrulama Kodu Gönder</button>
+  </div>
+
+  <!-- ── ADIM 2: OTP + onay ── -->
+  <div class="step" id="step-otp">
+    <h1>Kodu Girin</h1>
+    <p class="subtitle" id="otp-subtitle"></p>
+
+    <div class="msg error" id="otp-error"></div>
+
+    <label for="otp">6 haneli doğrulama kodu</label>
+    <input type="text" id="otp" inputmode="numeric" maxlength="6" placeholder="123456" autocomplete="one-time-code">
+
+    <label class="checkbox-row">
+      <input type="checkbox" id="confirm-check">
+      <span>Hesabımın ve kişisel verilerimin <strong>kalıcı olarak</strong> silineceğini,
+      bu işlemin geri alınamayacağını anladım.</span>
+    </label>
+
+    <button class="btn-danger" id="btn-verify" onclick="verifyDeletion()" disabled>Hesabımı Kalıcı Olarak Sil</button>
+    <button class="btn-link" onclick="goToStep('phone')">← Numarayı değiştir</button>
+  </div>
+
+  <!-- ── ADIM 3: sonuç ── -->
+  <div class="step" id="step-done">
+    <div class="success-icon">✅</div>
+    <h1 style="text-align:center">Hesabınız Silindi</h1>
+    <p class="subtitle" style="text-align:center" id="done-message"></p>
+  </div>
+
+  <p class="footer-note">Şipşak Ye · Bu sayfa hesap silme talebi dışında hiçbir işlem için kullanılamaz.</p>
+</div>
+
+<script>
+  // ─────────────────────────────────────────────────────────────────
+  // API base URL — DEPLOY ÖNCESİ MUTLAKA TEYİT EDİN.
+  // Backend'in gerçek public domain'i bu sayfa yazılırken doğrulanamadı;
+  // aşağıdaki değeri prod API adresiyle güncelleyin. Sayfa hangi origin'de
+  // yayınlanırsa yayınlansın, backend'in APP_ALLOWED_ORIGINS ortam
+  // değişkenine bu sayfanın origin'inin eklenmiş olması gerekir (CORS).
+  // ─────────────────────────────────────────────────────────────────
+  const API_BASE_URL = "https://api.sipsakye.com";
+
+  let currentPhone = "";
+
+  function goToStep(name) {
+    document.querySelectorAll(".step").forEach(el => el.classList.remove("active"));
+    document.getElementById("step-" + name).classList.add("active");
+  }
+
+  function showError(elId, message) {
+    const el = document.getElementById(elId);
+    el.textContent = message;
+    el.style.display = "block";
+  }
+
+  function hideError(elId) {
+    document.getElementById(elId).style.display = "none";
+  }
+
+  async function apiPost(path, body) {
+    const res = await fetch(API_BASE_URL + path, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
+    let data = null;
+    try { data = await res.json(); } catch (e) { /* boş gövde olabilir */ }
+    if (!res.ok) {
+      const message = (data && data.error && data.error.message) || "Bir hata oluştu. Lütfen tekrar deneyin.";
+      throw new Error(message);
+    }
+    return data;
+  }
+
+  async function startDeletion() {
+    hideError("phone-error");
+    const phone = document.getElementById("phone").value.trim();
+    if (!phone) {
+      showError("phone-error", "Telefon numarası zorunludur.");
+      return;
+    }
+    const btn = document.getElementById("btn-start");
+    btn.disabled = true;
+    btn.textContent = "Gönderiliyor...";
+    try {
+      await apiPost("/api/v1/user/account-deletion/start", { phone });
+      currentPhone = phone;
+      document.getElementById("otp-subtitle").textContent =
+        phone + " numarasına gönderilen 6 haneli kodu girin.";
+      document.getElementById("otp").value = "";
+      document.getElementById("confirm-check").checked = false;
+      document.getElementById("btn-verify").disabled = true;
+      hideError("otp-error");
+      goToStep("otp");
+    } catch (err) {
+      showError("phone-error", err.message);
+    } finally {
+      btn.disabled = false;
+      btn.textContent = "Doğrulama Kodu Gönder";
+    }
+  }
+
+  async function verifyDeletion() {
+    hideError("otp-error");
+    const otp = document.getElementById("otp").value.trim();
+    if (otp.length !== 6) {
+      showError("otp-error", "6 haneli kodu eksiksiz girin.");
+      return;
+    }
+    if (!document.getElementById("confirm-check").checked) {
+      showError("otp-error", "Devam etmek için onay kutusunu işaretleyin.");
+      return;
+    }
+    const btn = document.getElementById("btn-verify");
+    btn.disabled = true;
+    btn.textContent = "Siliniyor...";
+    try {
+      const data = await apiPost("/api/v1/user/account-deletion/verify", { phone: currentPhone, otp });
+      document.getElementById("done-message").textContent =
+        (data && data.data && data.data.message) || "Hesabınız ve kişisel verileriniz kalıcı olarak silindi.";
+      goToStep("done");
+    } catch (err) {
+      showError("otp-error", err.message);
+      btn.disabled = false;
+      btn.textContent = "Hesabımı Kalıcı Olarak Sil";
+    }
+  }
+
+  document.getElementById("confirm-check").addEventListener("change", function () {
+    document.getElementById("btn-verify").disabled = !this.checked;
+  });
+
+  document.getElementById("phone").addEventListener("keydown", function (e) {
+    if (e.key === "Enter") startDeletion();
+  });
+  document.getElementById("otp").addEventListener("keydown", function (e) {
+    if (e.key === "Enter" && !document.getElementById("btn-verify").disabled) verifyDeletion();
+  });
+</script>
+
+</body>
+</html>

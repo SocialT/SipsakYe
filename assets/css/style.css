@@ -417,13 +417,20 @@ ul, ol { padding-left: 1.35em; }
 .phone__screen {
   position: relative; width: 100%; height: 100%; border-radius: 32px; overflow: hidden;
   background: var(--bg-warm);
+  display: flex; align-items: center; justify-content: center;
 }
 .phone__screen::after {
   /* cam yansıması */
   content: ""; position: absolute; inset: 0; z-index: 4; pointer-events: none;
   background: linear-gradient(122deg, rgba(255,255,255,.22) 0%, rgba(255,255,255,0) 24%);
 }
-.phone__shot { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+.phone__shot {
+  /* ekran görüntüsü çerçeveyi tam doldurmak yerine biraz uzaktan/küçük
+     görünsün diye içine oturtuluyor — kenarları kırpılıp yakınlaşmış
+     görünmesin diye object-fit: contain kullanıyoruz. */
+  display: block; width: 86%; height: 86%; object-fit: contain; object-position: top center;
+  border-radius: 20px; box-shadow: 0 6px 20px rgba(0,0,0,.16);
+}
 
 .float-chip {
   position: absolute; z-index: 2; background: var(--surface); border: 1px solid var(--border);

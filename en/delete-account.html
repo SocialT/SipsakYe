@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Delete your account and data — Şipşak Ye</title>
-<meta name="description" content="How to delete your Şipşak Ye account and personal data. Delete from inside the app, or request deletion by email without installing the app.">
+<meta name="description" content="How to delete your Şipşak Ye account and personal data. Delete from inside the app, instantly via SMS verification, or by email — no app install required.">
 <link rel="canonical" href="https://sipsakye.com/en/delete-account.html">
 <link rel="alternate" hreflang="tr" href="https://sipsakye.com/hesap-silme.html">
 <link rel="alternate" hreflang="en" href="https://sipsakye.com/en/delete-account.html">
@@ -67,7 +67,7 @@
       <p class="breadcrumb"><a href="/en/">Home</a> &rsaquo; Delete account and data</p>
       <h1>Delete your account and data</h1>
       <p>You can delete your Şipşak Ye account and the personal data linked to it at any time.
-      Use either of the two routes below &mdash; the second one does not require installing the app.</p>
+      Use any of the routes below &mdash; options 2 and 3 do not require installing the app.</p>
       <p class="meta">This page applies to Şipşak Ye mobile app accounts on iOS and Android.</p>
     </div>
   </div>
@@ -92,10 +92,66 @@
   <section class="section section--warm">
     <div class="wrap reveal">
       <div class="section__head">
-        <p class="section__kicker">Option 2</p>
+        <p class="section__kicker">Option 2 &middot; Recommended</p>
+        <h2>Delete instantly via SMS verification</h2>
+        <p class="section__sub">No app install and no sign-in required. Verifying the code sent to your
+        registered phone number is enough to prove your identity &mdash; deletion completes immediately.</p>
+      </div>
+
+      <div class="otp-card">
+        <!-- Step 1: phone -->
+        <div class="otp-step is-active" id="otp-step-phone">
+          <div class="form-msg form-msg--error" id="otp-phone-error"></div>
+
+          <div class="field">
+            <label for="otp-phone">Your registered phone number</label>
+            <input type="tel" id="otp-phone" inputmode="tel" placeholder="+905XXXXXXXXX" autocomplete="tel">
+            <p class="field__hint">Use international format, e.g. +905XXXXXXXXX</p>
+          </div>
+
+          <button class="btn btn--primary" id="otp-btn-start" type="button">Send Verification Code</button>
+        </div>
+
+        <!-- Step 2: code + confirmation -->
+        <div class="otp-step" id="otp-step-code">
+          <p class="section__sub" id="otp-code-subtitle" style="margin-bottom:16px"></p>
+
+          <div class="form-msg form-msg--error" id="otp-code-error"></div>
+
+          <div class="field">
+            <label for="otp-code">6-digit verification code</label>
+            <input type="text" id="otp-code" inputmode="numeric" maxlength="6" placeholder="123456" autocomplete="one-time-code">
+          </div>
+
+          <label class="check-field" for="otp-confirm">
+            <input type="checkbox" id="otp-confirm">
+            <span>I understand my account and personal data will be <strong>permanently</strong> deleted
+            and this cannot be undone.</span>
+          </label>
+
+          <button class="btn btn--danger" id="otp-btn-verify" type="button" disabled>Permanently Delete My Account</button>
+          <button class="btn btn--text" id="otp-btn-back" type="button">&larr; Change number</button>
+        </div>
+
+        <!-- Step 3: result -->
+        <div class="otp-step otp-done" id="otp-step-done">
+          <div class="otp-done__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          </div>
+          <h3>Your account has been deleted</h3>
+          <p class="section__sub" id="otp-done-message" style="margin-top:6px"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap reveal">
+      <div class="section__head">
+        <p class="section__kicker">Option 3</p>
         <h2>Request deletion by email</h2>
-        <p class="section__sub">If you have uninstalled the app, cannot access your account, or do not want to
-        install the app at all, you can send your request directly by email.</p>
+        <p class="section__sub">If you no longer have access to your registered number or are having trouble
+        receiving SMS, you can also send your request directly by email.</p>
       </div>
 
       <div class="contact-cards">
@@ -143,12 +199,13 @@
           </div>
           <h3>Data that is deleted</h3>
           <ul style="color:var(--text-muted);font-size:.97rem;margin-top:10px">
-            <li>Account and profile details (name, username, date of birth)</li>
+            <li>Account and profile details (name, username)</li>
             <li>Contact details (email address, phone number)</li>
-            <li>Saved delivery addresses and location preferences</li>
-            <li>Favourite restaurants and cuisines, coupon records</li>
-            <li>Reviews you wrote and ratings you gave</li>
-            <li>Push notification and marketing permissions</li>
+            <li>Saved delivery addresses</li>
+            <li>Your favourites list</li>
+            <li>Notifications and saved device/notification permissions</li>
+            <li>Search history and cart</li>
+            <li>All active sessions on your account (you're signed out everywhere)</li>
           </ul>
         </div>
 
@@ -157,10 +214,13 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z"/></svg>
           </div>
           <h3>Data retained by law</h3>
-          <p>Some records must be kept after a deletion request, as required by legislation:</p>
+          <p>Some records must be kept after a deletion request, as required by legislation. These records are
+          made independent of your identity — your name, phone number and email are not displayed alongside them:</p>
           <ul style="color:var(--text-muted);font-size:.97rem;margin-top:10px">
             <li>Invoice, payment and accounting records (tax and commercial law)</li>
-            <li>Order and delivery records (consumer law and potential disputes)</li>
+            <li>Order, delivery, rating and review records (consumer law, potential disputes,
+            and abuse prevention)</li>
+            <li>Records showing when you gave and withdrew consent (required as proof under KVKK)</li>
             <li>Transaction security and access log records</li>
           </ul>
           <p style="margin-top:12px">These records are used only for the legal purpose that requires them to be
@@ -262,5 +322,109 @@
 </footer>
 
 <script src="/assets/js/main.js" defer></script>
+<script>
+(function () {
+  "use strict";
+
+  // Backend's public API address (api.sipsakye.com → sipsakye-api, reverse
+  // proxied by Caddy — deploy/Caddyfile).
+  var API_BASE_URL = "https://api.sipsakye.com";
+
+  var currentPhone = "";
+
+  function showStep(name) {
+    document.querySelectorAll(".otp-step").forEach(function (el) { el.classList.remove("is-active"); });
+    document.getElementById("otp-step-" + name).classList.add("is-active");
+  }
+  function showMsg(id, text) {
+    var el = document.getElementById(id);
+    el.textContent = text;
+    el.classList.add("is-visible");
+  }
+  function hideMsg(id) {
+    document.getElementById(id).classList.remove("is-visible");
+  }
+
+  function apiPost(path, body) {
+    return fetch(API_BASE_URL + path, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    }).then(function (res) {
+      return res.json().catch(function () { return null; }).then(function (data) {
+        if (!res.ok) {
+          var message = (data && data.error && data.error.message) || "Something went wrong. Please try again.";
+          throw new Error(message);
+        }
+        return data;
+      });
+    });
+  }
+
+  var phoneInput   = document.getElementById("otp-phone");
+  var btnStart     = document.getElementById("otp-btn-start");
+  var codeInput    = document.getElementById("otp-code");
+  var confirmCheck = document.getElementById("otp-confirm");
+  var btnVerify    = document.getElementById("otp-btn-verify");
+  var btnBack      = document.getElementById("otp-btn-back");
+
+  if (!btnStart) return;
+
+  btnStart.addEventListener("click", function () {
+    hideMsg("otp-phone-error");
+    var phone = phoneInput.value.trim();
+    if (!phone) { showMsg("otp-phone-error", "Phone number is required."); return; }
+
+    btnStart.disabled = true;
+    btnStart.textContent = "Sending…";
+    apiPost("/api/v1/user/account-deletion/start", { phone: phone })
+      .then(function () {
+        currentPhone = phone;
+        document.getElementById("otp-code-subtitle").textContent =
+          "Enter the 6-digit code sent to " + phone + ".";
+        codeInput.value = "";
+        confirmCheck.checked = false;
+        btnVerify.disabled = true;
+        hideMsg("otp-code-error");
+        showStep("code");
+      })
+      .catch(function (err) { showMsg("otp-phone-error", err.message); })
+      .finally(function () {
+        btnStart.disabled = false;
+        btnStart.textContent = "Send Verification Code";
+      });
+  });
+
+  confirmCheck.addEventListener("change", function () {
+    btnVerify.disabled = !this.checked;
+  });
+
+  btnBack.addEventListener("click", function () { showStep("phone"); });
+
+  btnVerify.addEventListener("click", function () {
+    hideMsg("otp-code-error");
+    var code = codeInput.value.trim();
+    if (code.length !== 6) { showMsg("otp-code-error", "Enter the full 6-digit code."); return; }
+    if (!confirmCheck.checked) { showMsg("otp-code-error", "Check the confirmation box to continue."); return; }
+
+    btnVerify.disabled = true;
+    btnVerify.textContent = "Deleting…";
+    apiPost("/api/v1/user/account-deletion/verify", { phone: currentPhone, otp: code })
+      .then(function (data) {
+        var msg = (data && data.data && data.data.message) || "Your account and personal data have been permanently deleted.";
+        document.getElementById("otp-done-message").textContent = msg;
+        showStep("done");
+      })
+      .catch(function (err) {
+        showMsg("otp-code-error", err.message);
+        btnVerify.disabled = false;
+        btnVerify.textContent = "Permanently Delete My Account";
+      });
+  });
+
+  phoneInput.addEventListener("keydown", function (ev) { if (ev.key === "Enter") btnStart.click(); });
+  codeInput.addEventListener("keydown", function (ev) { if (ev.key === "Enter" && !btnVerify.disabled) btnVerify.click(); });
+})();
+</script>
 </body>
 </html>

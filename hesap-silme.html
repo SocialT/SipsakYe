@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Hesap ve veri silme talebi — Şipşak Ye</title>
-<meta name="description" content="Şipşak Ye hesabını ve kişisel verilerini nasıl sileceğini öğren. Uygulama içinden veya uygulamayı yüklemeden e-posta ile silme talebi oluşturabilirsin.">
+<meta name="description" content="Şipşak Ye hesabını ve kişisel verilerini nasıl sileceğini öğren. Uygulama içinden, uygulamayı yüklemeden SMS doğrulamasıyla anında veya e-posta ile silme talebi oluşturabilirsin.">
 <link rel="canonical" href="https://sipsakye.com/hesap-silme.html">
 <link rel="alternate" hreflang="tr" href="https://sipsakye.com/hesap-silme.html">
 <link rel="alternate" hreflang="en" href="https://sipsakye.com/en/delete-account.html">
@@ -67,7 +67,7 @@
       <p class="breadcrumb"><a href="/">Ana sayfa</a> &rsaquo; Hesap ve veri silme</p>
       <h1>Hesap ve veri silme talebi</h1>
       <p>Şipşak Ye hesabını ve hesabına bağlı kişisel verilerini dilediğin zaman silebilirsin.
-      Aşağıdaki iki yoldan biriyle talebini iletebilirsin &mdash; ikincisi için uygulamayı yüklemene gerek yok.</p>
+      Aşağıdaki yollardan biriyle talebini iletebilirsin &mdash; 2. ve 3. yol için uygulamayı yüklemene gerek yok.</p>
       <p class="meta">Bu sayfa, Şipşak Ye mobil uygulaması (iOS ve Android) hesapları için geçerlidir.</p>
     </div>
   </div>
@@ -94,10 +94,66 @@
   <section class="section section--warm">
     <div class="wrap reveal">
       <div class="section__head">
-        <p class="section__kicker">2. Yol</p>
+        <p class="section__kicker">2. Yol &middot; Önerilen</p>
+        <h2>SMS doğrulamasıyla anında sil</h2>
+        <p class="section__sub">Uygulamayı yüklemene veya hesabına giriş yapmana gerek yok. Kayıtlı telefon
+        numarana gelen kodu doğrulaman, kimliğini kanıtlaman için yeterli &mdash; işlem hemen tamamlanır.</p>
+      </div>
+
+      <div class="otp-card">
+        <!-- Adım 1: telefon -->
+        <div class="otp-step is-active" id="otp-step-phone">
+          <div class="form-msg form-msg--error" id="otp-phone-error"></div>
+
+          <div class="field">
+            <label for="otp-phone">Kayıtlı telefon numaran</label>
+            <input type="tel" id="otp-phone" inputmode="tel" placeholder="+905XXXXXXXXX" autocomplete="tel">
+            <p class="field__hint">Uluslararası formatta gir, örn. +905XXXXXXXXX</p>
+          </div>
+
+          <button class="btn btn--primary" id="otp-btn-start" type="button">Doğrulama Kodu Gönder</button>
+        </div>
+
+        <!-- Adım 2: kod + onay -->
+        <div class="otp-step" id="otp-step-code">
+          <p class="section__sub" id="otp-code-subtitle" style="margin-bottom:16px"></p>
+
+          <div class="form-msg form-msg--error" id="otp-code-error"></div>
+
+          <div class="field">
+            <label for="otp-code">6 haneli doğrulama kodu</label>
+            <input type="text" id="otp-code" inputmode="numeric" maxlength="6" placeholder="123456" autocomplete="one-time-code">
+          </div>
+
+          <label class="check-field" for="otp-confirm">
+            <input type="checkbox" id="otp-confirm">
+            <span>Hesabımın ve kişisel verilerimin <strong>kalıcı olarak</strong> silineceğini, bu işlemin
+            geri alınamayacağını anladım.</span>
+          </label>
+
+          <button class="btn btn--danger" id="otp-btn-verify" type="button" disabled>Hesabımı Kalıcı Olarak Sil</button>
+          <button class="btn btn--text" id="otp-btn-back" type="button">&larr; Numarayı değiştir</button>
+        </div>
+
+        <!-- Adım 3: sonuç -->
+        <div class="otp-step otp-done" id="otp-step-done">
+          <div class="otp-done__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          </div>
+          <h3>Hesabın silindi</h3>
+          <p class="section__sub" id="otp-done-message" style="margin-top:6px"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap reveal">
+      <div class="section__head">
+        <p class="section__kicker">3. Yol</p>
         <h2>E-posta ile silme talebi</h2>
-        <p class="section__sub">Uygulamayı kaldırdıysan, hesabına erişemiyorsan veya uygulamayı hiç yüklemek
-        istemiyorsan talebini doğrudan e-posta ile iletebilirsin.</p>
+        <p class="section__sub">Kayıtlı numarana artık ulaşamıyorsan veya SMS almakta sorun yaşıyorsan
+        talebini doğrudan e-posta ile de iletebilirsin.</p>
       </div>
 
       <div class="contact-cards">
@@ -146,12 +202,13 @@
           </div>
           <h3>Silinen veriler</h3>
           <ul style="color:var(--text-muted);font-size:.97rem;margin-top:10px">
-            <li>Hesap ve profil bilgilerin (ad-soyad, kullanıcı adı, doğum tarihi)</li>
+            <li>Hesap ve profil bilgilerin (ad-soyad, kullanıcı adı)</li>
             <li>İletişim bilgilerin (e-posta adresi, telefon numarası)</li>
-            <li>Kayıtlı teslimat adreslerin ve konum tercihlerin</li>
-            <li>Favori restoran/mutfak tercihlerin ve kupon bilgilerin</li>
-            <li>Yazdığın yorum ve verdiğin puanlar</li>
-            <li>Anlık bildirim ve pazarlama izinlerin</li>
+            <li>Kayıtlı teslimat adreslerin</li>
+            <li>Favori ürün listen</li>
+            <li>Bildirimlerin ve kayıtlı cihaz/bildirim izinlerin</li>
+            <li>Arama geçmişin ve sepetin</li>
+            <li>Hesabına ait tüm oturumlar (otomatik çıkış yapılır)</li>
           </ul>
         </div>
 
@@ -160,10 +217,14 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z"/></svg>
           </div>
           <h3>Yasal olarak saklanması gereken veriler</h3>
-          <p>Bazı kayıtlar, silme talebinden sonra da mevzuat gereği saklanmaya devam eder:</p>
+          <p>Bazı kayıtlar, silme talebinden sonra da mevzuat gereği saklanmaya devam eder. Bu kayıtlar
+          kimliğinden bağımsız hale getirilir; adın, telefonun ve e-postan bu kayıtlarla birlikte
+          görüntülenmez:</p>
           <ul style="color:var(--text-muted);font-size:.97rem;margin-top:10px">
             <li>Fatura, ödeme ve muhasebe kayıtları (vergi ve ticaret mevzuatı gereği)</li>
-            <li>Sipariş ve teslimat kayıtları (tüketici mevzuatı ve olası uyuşmazlıklar için)</li>
+            <li>Sipariş, teslimat, puan ve yorum kayıtları (tüketici mevzuatı, olası uyuşmazlıklar
+            ve kötüye kullanımın önlenmesi için)</li>
+            <li>Onay/izin verdiğin ve geri çektiğin tarihleri gösteren kayıtlar (KVKK gereği ispat amaçlı)</li>
             <li>İşlem güvenliği ve erişim (log) kayıtları</li>
           </ul>
           <p style="margin-top:12px">Bu kayıtlar yalnızca saklanmalarını gerektiren yasal amaçla kullanılır;
@@ -271,5 +332,109 @@
 </footer>
 
 <script src="/assets/js/main.js" defer></script>
+<script>
+(function () {
+  "use strict";
+
+  // Backend'in public API adresi (api.sipsakye.com → sipsakye-api, Caddy ile
+  // reverse-proxy'lendi — deploy/Caddyfile).
+  var API_BASE_URL = "https://api.sipsakye.com";
+
+  var currentPhone = "";
+
+  function showStep(name) {
+    document.querySelectorAll(".otp-step").forEach(function (el) { el.classList.remove("is-active"); });
+    document.getElementById("otp-step-" + name).classList.add("is-active");
+  }
+  function showMsg(id, text) {
+    var el = document.getElementById(id);
+    el.textContent = text;
+    el.classList.add("is-visible");
+  }
+  function hideMsg(id) {
+    document.getElementById(id).classList.remove("is-visible");
+  }
+
+  function apiPost(path, body) {
+    return fetch(API_BASE_URL + path, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    }).then(function (res) {
+      return res.json().catch(function () { return null; }).then(function (data) {
+        if (!res.ok) {
+          var message = (data && data.error && data.error.message) || "Bir hata oluştu. Lütfen tekrar dene.";
+          throw new Error(message);
+        }
+        return data;
+      });
+    });
+  }
+
+  var phoneInput   = document.getElementById("otp-phone");
+  var btnStart     = document.getElementById("otp-btn-start");
+  var codeInput    = document.getElementById("otp-code");
+  var confirmCheck = document.getElementById("otp-confirm");
+  var btnVerify    = document.getElementById("otp-btn-verify");
+  var btnBack      = document.getElementById("otp-btn-back");
+
+  if (!btnStart) return; // Bu sayfada form yoksa (ör. henüz build edilmemiş EN kopyası) sessizce çık.
+
+  btnStart.addEventListener("click", function () {
+    hideMsg("otp-phone-error");
+    var phone = phoneInput.value.trim();
+    if (!phone) { showMsg("otp-phone-error", "Telefon numarası zorunludur."); return; }
+
+    btnStart.disabled = true;
+    btnStart.textContent = "Gönderiliyor…";
+    apiPost("/api/v1/user/account-deletion/start", { phone: phone })
+      .then(function () {
+        currentPhone = phone;
+        document.getElementById("otp-code-subtitle").textContent =
+          phone + " numarasına gönderilen 6 haneli kodu gir.";
+        codeInput.value = "";
+        confirmCheck.checked = false;
+        btnVerify.disabled = true;
+        hideMsg("otp-code-error");
+        showStep("code");
+      })
+      .catch(function (err) { showMsg("otp-phone-error", err.message); })
+      .finally(function () {
+        btnStart.disabled = false;
+        btnStart.textContent = "Doğrulama Kodu Gönder";
+      });
+  });
+
+  confirmCheck.addEventListener("change", function () {
+    btnVerify.disabled = !this.checked;
+  });
+
+  btnBack.addEventListener("click", function () { showStep("phone"); });
+
+  btnVerify.addEventListener("click", function () {
+    hideMsg("otp-code-error");
+    var code = codeInput.value.trim();
+    if (code.length !== 6) { showMsg("otp-code-error", "6 haneli kodu eksiksiz gir."); return; }
+    if (!confirmCheck.checked) { showMsg("otp-code-error", "Devam etmek için onay kutusunu işaretle."); return; }
+
+    btnVerify.disabled = true;
+    btnVerify.textContent = "Siliniyor…";
+    apiPost("/api/v1/user/account-deletion/verify", { phone: currentPhone, otp: code })
+      .then(function (data) {
+        var msg = (data && data.data && data.data.message) || "Hesabın ve kişisel verilerin kalıcı olarak silindi.";
+        document.getElementById("otp-done-message").textContent = msg;
+        showStep("done");
+      })
+      .catch(function (err) {
+        showMsg("otp-code-error", err.message);
+        btnVerify.disabled = false;
+        btnVerify.textContent = "Hesabımı Kalıcı Olarak Sil";
+      });
+  });
+
+  phoneInput.addEventListener("keydown", function (ev) { if (ev.key === "Enter") btnStart.click(); });
+  codeInput.addEventListener("keydown", function (ev) { if (ev.key === "Enter" && !btnVerify.disabled) btnVerify.click(); });
+})();
+</script>
 </body>
 </html>

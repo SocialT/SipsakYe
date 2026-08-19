@@ -24,6 +24,7 @@ PAGES = {
     "hesap-silme": {"url_tr": "/hesap-silme.html",         "url_en": "/en/delete-account.html"},
     "iletisim":    {"url_tr": "/iletisim.html",            "url_en": "/en/contact.html"},
     "kosullar":    {"url_tr": "/kullanim-kosullari.html",  "url_en": "/en/terms.html"},
+    "onbilgi":     {"url_tr": "/on-bilgilendirme-formu.html", "url_en": "/en/pre-contract-information.html"},
     "gizlilik":    {"url_tr": "/gizlilik-politikasi.html", "url_en": "/en/privacy-policy.html"},
     "aydinlatma":  {"url_tr": "/aydinlatma-metni.html",    "url_en": "/en/privacy-notice.html"},
     "cerez":       {"url_tr": "/cerez-politikasi.html",    "url_en": "/en/cookie-policy.html"},
@@ -36,6 +37,7 @@ PAGES = {
 LEGAL_ITEMS = [
     # page_id,      TR etiket,              EN etiket
     ("kosullar",   "Kullanım Koşulları",     "Terms of Use"),
+    ("onbilgi",    "Ön Bilgilendirme Formu", "Pre-Contract Information Form"),
     ("gizlilik",   "Gizlilik Politikası",    "Privacy Policy"),
     ("aydinlatma", "Aydınlatma Metni",       "Privacy Notice"),
     ("cerez",      "Çerez Politikası",       "Cookie Policy"),

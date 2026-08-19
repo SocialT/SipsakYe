@@ -75,15 +75,23 @@ def render_header(page_id, lang):
     if is_tr:
         sss_href = "#sss" if home else "/#sss"
         destek_current = ' aria-current="page"' if page_id == "destek" else ""
+        hesap_current = ' aria-current="page"' if page_id == "hesap-silme" else ""
+        iletisim_current = ' aria-current="page"' if page_id == "iletisim" else ""
         legal_label = "Sözleşmeler"
         nav_faq = f'<a class="nav__link" href="{sss_href}">SSS</a>'
         nav_support = f'<a class="nav__link" href="/destek.html"{destek_current}>Destek</a>'
+        nav_hesap = f'<a class="nav__link" href="/hesap-silme.html"{hesap_current}>Hesap Sil</a>'
+        nav_iletisim = f'<a class="nav__link" href="/iletisim.html"{iletisim_current}>İletişim</a>'
     else:
         faq_href = "#faq" if home else "/en/#faq"
         support_current = ' aria-current="page"' if page_id == "destek" else ""
+        hesap_current = ' aria-current="page"' if page_id == "hesap-silme" else ""
+        iletisim_current = ' aria-current="page"' if page_id == "iletisim" else ""
         legal_label = "Legal"
         nav_faq = f'<a class="nav__link" href="{faq_href}">FAQ</a>'
         nav_support = f'<a class="nav__link" href="/en/support.html"{support_current}>Support</a>'
+        nav_hesap = f'<a class="nav__link" href="/en/delete-account.html"{hesap_current}>Delete Account</a>'
+        nav_iletisim = f'<a class="nav__link" href="/en/contact.html"{iletisim_current}>Contact</a>'
 
     panel_links = []
     for pid, label_tr, label_en in LEGAL_ITEMS:
@@ -124,6 +132,8 @@ def render_header(page_id, lang):
     <nav class="nav" id="nav" aria-label="{aria_label}">
       {nav_faq}
       {nav_support}
+      {nav_hesap}
+      {nav_iletisim}
       {nav_legal}
     </nav>
     <div class="header-tools">
